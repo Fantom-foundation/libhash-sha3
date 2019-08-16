@@ -1,0 +1,13 @@
+[package]
+name = "libhash-sha3"
+version = "0.1.0"
+authors = ["Maxim Zakharov <5158255+Maxime2@users.noreply.github.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+libhash = { git = "https://github.com/Fantom-foundation/libhash" }
+serde = { version = "1.0.97", features = ["derive"] }
+sha3 = "0.8.2"
+bincode = "1.1.4"
