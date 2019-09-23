@@ -2,9 +2,10 @@ use bincode;
 use libhash::{errors::Error, Hashing};
 use serde::{Deserialize, Serialize};
 use sha3::{digest::generic_array::transmute, Digest, Sha3_256};
+use to_vec::ToVec;
 
 // Hash type used in this implementation
-#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, Hash, Copy)]
 pub struct Hash(pub [u8; 32]);
 
 impl Hashing for Hash {
@@ -27,6 +28,18 @@ impl Hashing for Hash {
 impl AsRef<[u8]> for Hash {
     fn as_ref(&self) -> &[u8] {
         self.0.as_ref()
+    }
+}
+
+impl ToVec<u8> for Hash {
+    fn to_vec(self) -> Vec<u8> {
+        self.0.to_vec()
+    }
+}
+
+impl Default for Hash {
+    fn default() -> Self {
+        Hash { 0: [0; 32] }
     }
 }
 

@@ -11,3 +11,4 @@ libhash = { git = "https://github.com/Fantom-foundation/libhash" }
 serde = { version = "1.0.97", features = ["derive"] }
 sha3 = "0.8.2"
 bincode = "1.1.4"
+to_vec="*"
