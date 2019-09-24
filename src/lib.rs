@@ -1,5 +1,5 @@
 use bincode;
-use libhash::{errors::Error, Hashing};
+use libhash::{errors::Error, Hash as LibHash};
 use serde::{Deserialize, Serialize};
 use sha3::{digest::generic_array::transmute, Digest, Sha3_256};
 use to_vec::ToVec;
@@ -8,8 +8,7 @@ use to_vec::ToVec;
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, Hash, Copy)]
 pub struct Hash(pub [u8; 32]);
 
-impl Hashing for Hash {
-    type Hash = Hash;
+impl LibHash for Hash {
     fn hash<D: Serialize>(d: &D) -> Result<Hash, Error> {
         let mut hasher = Sha3_256::new();
         let ser =
