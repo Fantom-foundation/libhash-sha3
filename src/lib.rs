@@ -9,7 +9,7 @@ use to_vec::ToVec;
 pub struct Hash(pub [u8; 32]);
 
 impl LibHash for Hash {
-    fn hash<D: Serialize>(d: &D) -> Result<Hash, Error> {
+    fn new<D: Serialize>(d: &D) -> Result<Hash, Error> {
         let mut hasher = Sha3_256::new();
         let ser =
             bincode::serialize(d).map_err(|x| Error::ComputeHashSerialize(format!("{}", x)))?;
@@ -17,7 +17,7 @@ impl LibHash for Hash {
         let r = hasher.result();
         Ok(Hash(unsafe { transmute(r) }))
     }
-    fn new(digest: &[u8]) -> Hash {
+    fn new_from_digest(digest: &[u8]) -> Hash {
         let mut a: [u8; 32] = [0; 32];
         a.copy_from_slice(&digest[0..32]);
         Hash(a)
