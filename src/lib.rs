@@ -1,5 +1,10 @@
+#[macro_use]
+extern crate failure;
 use bincode;
-use libhash::{errors::Error, Hash as LibHash};
+use libhash::{
+    errors::{Error, Result},
+    Hash as LibHash,
+};
 use serde::{Deserialize, Serialize};
 use sha3::{digest::generic_array::transmute, Digest, Sha3_256};
 use to_vec::ToVec;
@@ -9,7 +14,7 @@ use to_vec::ToVec;
 pub struct Hash(pub [u8; 32]);
 
 impl LibHash for Hash {
-    fn new<D: Serialize>(d: &D) -> Result<Hash, Error> {
+    fn new<D: Serialize>(d: &D) -> Result<Hash> {
         let mut hasher = Sha3_256::new();
         let ser =
             bincode::serialize(d).map_err(|x| Error::ComputeHashSerialize(format!("{}", x)))?;
