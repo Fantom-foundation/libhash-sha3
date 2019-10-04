@@ -8,8 +8,8 @@ edition = "2018"
 
 [dependencies]
 libhash = { git = "https://github.com/Fantom-foundation/libhash" }
-serde = { version = "1.0.97", features = ["derive"] }
+serde = { version = "1.0.101", features = ["derive"] }
 sha3 = "0.8.2"
-bincode = "1.1.4"
-to_vec="*"
+bincode = "1.2.0"
+to_vec= "0.1.0"
 failure = "0.1.5"
