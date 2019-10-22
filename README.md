@@ -1,6 +1,6 @@
 libhash-sha3-sha3
 ===========
-[![Build Status](https://travis-ci.org/Fantom-foundation/libhash-sha3.svg?branch=master)](https://travis-ci.org/Fantom-foundation/libhash-sha3)
+[![Rust: nightly](https://img.shields.io/badge/Rust-nightly-blue.svg)](https://www.rust-lang.org) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Build Status](https://travis-ci.org/Fantom-foundation/libhash-sha3.svg?branch=master)](https://travis-ci.org/Fantom-foundation/libhash-sha3)
 
 libhash-sha3 in Rust.
 
@@ -16,14 +16,17 @@ We use [rust-clippy](https://github.com/rust-lang-nursery/rust-clippy) linters t
 
 There are plenty of [IDEs](https://areweideyet.com) and other [Rust development tools to consider](https://github.com/rust-unofficial/awesome-rust#development-tools).
 
-### Step-by-step guide
+### CLI instructions
+
 ```bash
 # Install Rust (nightly)
-$ curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly
+$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain nightly
 # Install cargo-make (cross-platform feature-rich reimplementation of Make)
 $ cargo install --force cargo-make
 # Install rustfmt (Rust formatter)
 $ rustup component add rustfmt
+# Install clippy (Rust linter)
+$ rustup component add clippy
 # Clone this repo
 $ git clone https://github.com/Fantom-foundation/libhash-sha3 && cd libhash-sha3
 # Run tests
