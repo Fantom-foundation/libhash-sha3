@@ -1,6 +1,8 @@
 #[macro_use]
 extern crate failure;
 use bincode;
+use core::fmt::Display;
+use core::fmt::Formatter;
 use libhash::{
     errors::{Error, Result},
     Hash as LibHash,
@@ -8,6 +10,9 @@ use libhash::{
 use serde::{Deserialize, Serialize};
 use sha3::{digest::generic_array::transmute, Digest, Sha3_256};
 use to_vec::ToVec;
+
+const DISPLAY_PREFIX_LEN: usize = 3;
+const DISPLAY_SUFFIX_LEN: usize = 3;
 
 // Hash type used in this implementation
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, Hash, Copy)]
@@ -44,6 +49,20 @@ impl ToVec<u8> for Hash {
 impl Default for Hash {
     fn default() -> Self {
         Hash { 0: [0; 32] }
+    }
+}
+
+impl Display for Hash {
+    fn fmt(&self, f: &mut Formatter) -> core::fmt::Result {
+        let mut formatted = String::new();
+        for num in 1..DISPLAY_PREFIX_LEN {
+            formatted.push_str(&format!("{:02X}", self.0[num - 1]));
+        }
+        formatted.push_str("::");
+        for num in (1..DISPLAY_SUFFIX_LEN).rev() {
+            formatted.push_str(&format!("{:02X}", self.0[32 - num]));
+        }
+        write!(f, "{}", formatted)
     }
 }
 
